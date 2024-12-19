@@ -7,13 +7,14 @@ const initialValue = {
 
 const BrowserContext = createContext(initialValue)
 
-const BrowserProvider = ({Children})=>{
+const BrowserProvider = ({children})=>{
 
-    const [{name}, browserDispatch] = useReducer(BrowserReducer, initialValue)
-return(
-    <BrowserContext.Provider value={{name, browserDispatch}}>
-        {Children}
+    const [{name}, BrowserDispatch] = useReducer(BrowserReducer, initialValue)
+return( 
+    <BrowserContext.Provider value={{name, BrowserDispatch}}>
+        {children} 
     </BrowserContext.Provider>
 )}
 const useBrowser =()=> useContext(BrowserContext)
 export  {BrowserProvider, useBrowser}
+    

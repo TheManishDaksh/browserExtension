@@ -1,9 +1,9 @@
 import React from 'react'
 import { useBrowser } from '../../Context/browser-context'
 
-function Home() {
+const Home =()=> {
     
-const {name, browserDispatch} = useBrowser()
+const {name, BrowserDispatch} = useBrowser()
 
 const handleForm = (event)=>{
     event.preventDefault();
@@ -12,11 +12,11 @@ const handleForm = (event)=>{
  const handleKey = (event)=>{
     
     if(event.key === "Enter" && event.target.value.length > 0){
-        browserDispatch({
+        BrowserDispatch({
             type : "NAME",
             payload : event.target.value
         })  
-    }
+    } 
 }
 
   return (

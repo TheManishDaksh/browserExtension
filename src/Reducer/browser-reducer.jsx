@@ -8,8 +8,6 @@ export  const BrowserReducer = (state , {type,payload})=>{
         }
         
         default :
-        return {
-            state
-        }
+        return state
     }
 }

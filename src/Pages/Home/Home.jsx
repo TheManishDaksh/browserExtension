@@ -16,6 +16,7 @@ const handleForm = (event)=>{
             type : "NAME",
             payload : event.target.value
         })  
+        localStorage.setItem("name", event.target.value)
     } 
 }
 

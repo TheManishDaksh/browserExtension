@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useBrowser } from '../../Context/browser-context'
 
+
 const Home =()=> {
-    
+  const inputRef = useRef();  
 const {name, BrowserDispatch} = useBrowser()
 
 const handleForm = (event)=>{
@@ -11,12 +12,12 @@ const handleForm = (event)=>{
 
  const handleKey = (event)=>{
     
-    if(event.key === "Enter" && event.target.value.length > 0){
+    if(event.key === "Enter" && inputRef.current.value.length > 0){
         BrowserDispatch({
             type : "NAME",
-            payload : event.target.value
+            payload : inputRef.current.value
         })  
-        localStorage.setItem("name", event.target.value)
+        localStorage.setItem("name", inputRef.current.value) 
     } 
 }
 
@@ -28,7 +29,7 @@ const handleForm = (event)=>{
         <span>What's your name </span>
         <span>
             <form onSubmit={handleForm}> 
-            <input type="text" className='bg-transparent outline-none  border-solid border-b-2 border-white text-center'
+            <input type="text" ref={inputRef} className='bg-transparent outline-none  border-solid border-b-2 border-white text-center'
                 onKeyDown={handleKey}
                 required
             />

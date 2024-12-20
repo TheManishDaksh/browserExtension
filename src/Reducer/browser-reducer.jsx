@@ -1,3 +1,4 @@
+import Task from "../Pages/Task/task"
 
 export  const BrowserReducer = (state , {type,payload})=>{
     switch(type){
@@ -16,6 +17,11 @@ export  const BrowserReducer = (state , {type,payload})=>{
                     ...state,
                     message : payload >= 12 ? `Good Morning `: payload <= 17 ?`Good AfterNoon` : `Good Evening `
                 }
+                case "TASK":
+                    return {
+                        ...state,
+                        task : payload
+                    }
         default :
         return state
     }

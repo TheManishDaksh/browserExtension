@@ -8,7 +8,6 @@ import { useEffect } from "react"
 
 const index = Math.floor(Math.random()*images.length)
 const bgImage = images[index].image;
-
 function App() {
   
   const {name, BrowserDispatch} = useBrowser()

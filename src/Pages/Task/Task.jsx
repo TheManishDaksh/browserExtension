@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useBrowser } from '../../Context/browser-context'
 import close from "../../assets/close.png"
 import { quotes } from '../../db/quote'
+import Todo from '../../component/Todo'
 
 const index = Math.floor(Math.random()*quotes.length)
 const quote = quotes[index].quote
 
-function Task() {
+ const Task =()=> {
 
   const [check, setChecked] = useState(false)
+  const [todoIsOpen, setTodoIsOpen] = useState(false);
   const taskRef = useRef();
   
   const { time, BrowserDispatch, name, message, task} = useBrowser()
@@ -18,7 +20,7 @@ function Task() {
   },[time])
 
   useEffect(()=>{
-    const userTask = localStorage.getItem("task")
+    const userTask = localStorage.getItem("task") 
     BrowserDispatch({
       type : "TASK",
       payload : userTask
@@ -30,7 +32,7 @@ function Task() {
     toggleCheck === "true" ? setChecked(true) : setChecked(false)
   },[])
 
-  function getCurrentTime (){
+  const getCurrentTime =()=>{
 
     const today = new Date ()
     const hours = today.getHours()
@@ -53,11 +55,11 @@ function Task() {
       payload : hour
     })
   }
-  function taskForm(event){
+  const taskForm =(event)=>{
     event.preventDefault()
   }
 
-  function handleForm(event){
+  const handleForm =(event)=>{
     if(event.key === "Enter" && taskRef.current.value.length > 0){
       BrowserDispatch({
         type : "TASK",
@@ -67,7 +69,7 @@ function Task() {
     }
   }
 
-  function handleTaskChange(event){
+  const handleTaskChange =(event)=>{
     if(event.target.checked){
       setChecked(check => !check)
     }else{
@@ -76,13 +78,17 @@ function Task() {
   localStorage.setItem("toggleCheck", !check) 
   }
 
-  function handleDelete (){
+  const handleDelete =()=>{
     BrowserDispatch({
       type : "CLEAR"
     })
-    
+    setChecked(false) 
     localStorage.removeItem("task")
     localStorage.removeItem("toggleCheck")
+  }
+
+  const addTodo =()=>{
+    setTodoIsOpen(todoIsOpen => !todoIsOpen)
   }
 
   return (
@@ -125,6 +131,12 @@ function Task() {
       </div>
       </div>
     )}
+    <div className='absolute bottom-10 right-12 text-white text-xl '>
+      {todoIsOpen && <Todo/>}
+      <div className='bg-slate-600 rounded-lg px-4 py-2 font-serif'>
+        <button onClick={addTodo}>Todo</button>
+      </div>
+    </div>
     </div>
   )
 }

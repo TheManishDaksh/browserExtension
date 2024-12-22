@@ -2,7 +2,7 @@ import {images} from "./db/image"
 import './App.css'
 import Home from "./Pages/Home/Home"
 import {useBrowser} from "./Context/browser-context"
-import Task from "./Pages/Task/task"
+import Task from "./Pages/Task/Task"
 import { useEffect } from "react"
 
 
